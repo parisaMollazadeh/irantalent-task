@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import SelectBoxOption from "./SelectBoxOption";
-import styles from './SelectBox.module.css';
-import SelectBoxSearch from "./SelectBoxSearch";
+import SelectBoxOption from "./selectBoxOption";
+import SelectBoxSearch from "./selectBoxSearch";
 import { filterArrayWithStringField, sortArrayBySelection } from "@/app/utils/array";
+import styles from './SelectBox.module.css';
+
 
 interface SelectBoxProps {
   title: string;

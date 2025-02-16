@@ -1,32 +1,35 @@
+
+/* General container styles */
 .selectBox {
   position: relative;
   display: inline-block;
 }
 
+/* Input Wrapper */
 .inputWrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 18px;
+  padding: var(--padding-medium);
   border-radius: 25px;
-  background-color: #007bff;
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
   cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition: background-color var(--transition-duration), box-shadow var(--transition-duration);
   white-space: nowrap;
   border: 2px solid transparent;
 }
 
 .inputWrapper.noSelection {
-  background-color: white; 
-  color: black; 
-  border: 2px solid black; 
+  background-color: var(--secondary-color); /* White */
+  color: var(--text-color); /* Black */
+  border: 2px solid var(--text-color); /* Black */
 }
 
 .inputWrapper input {
   border: none;
   background-color: transparent;
-  font-size: 1.5rem;
+  font-size: var(--font-size-large);
   color: inherit;
   outline: none;
   cursor: pointer;
@@ -35,26 +38,32 @@
   max-width: 100%;
 }
 
+/* Arrow */
 .arrow {
-  font-size: 1.2rem;
+  font-size: var(--font-size-base);
   font-weight: bold;
-  color: inherit; 
-  margin-left: 8px;
-  transition: transform 0.3s ease;
+  color: inherit;
+  margin-left: var(--padding-small);
+  transition: transform var(--transition-duration);
 }
 
+.open .arrow {
+  transform: rotate(180deg);
+}
+
+/* Badge */
 .countBadge {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 30px;
-  height: 30px;
-  background-color: white;
-  color: #007bff;
+  width: var(--badge-size);
+  height: var(--badge-size);
+  background-color: var(--secondary-color); /* White */
+  color: var(--primary-color); /* Blue */
   font-size: 0.9rem;
   font-weight: bold;
   border-radius: 50%;
-  margin-right: 8px;
+  margin-right: var(--padding-small);
   visibility: hidden;
 }
 
@@ -62,44 +71,43 @@
   visibility: visible;
 }
 
-.open .arrow {
-  transform: rotate(180deg);
-}
-
+/* Dropdown */
 .dropdown {
   position: absolute;
   top: calc(100% + 5px);
   left: 0;
   right: 0;
   z-index: 10;
-  background-color: white;
+  background-color: var(--secondary-color); /* White */
   border: none;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
   max-height: 300px;
-  overflow: hidden; 
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  padding: 8px 4px;
+  padding: var(--padding-small);
 }
 
+/* Search Box */
 .searchBoxContainer {
-  padding: 8px 12px;
-  margin-bottom: 8px;
+  padding: var(--padding-small) var(--padding-medium);
+  margin-bottom: var(--padding-small);
 }
 
-.searchBoxContainer input{
+.searchBoxContainer input {
   width: 100%;
   border-radius: 6px;
   padding: 12px 16px;
   min-height: 36px;
-  font-size: 1.1rem;
+  font-size: var(--font-size-base);
   font-weight: 400;
 }
 
+/* Options Container */
 .optionsContainer {
   flex-grow: 1;
-  overflow-y: auto; 
+  overflow-y: auto;
   max-height: 300px;
   padding: 0;
 }
@@ -113,32 +121,33 @@
 .optionsContainer li {
   display: flex;
   align-items: center;
-  padding: 8px 16px;
+  padding: var(--padding-small) var(--padding-medium);
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-size: 1.2rem;
+  transition: background-color var(--transition-duration);
+  font-size: var(--font-size-base);
   font-weight: 500;
-  flex-grow: 1; 
 }
 
+.optionsContainer li:hover {
+  background-color: #f5f5f5;
+}
 
 .optionsContainer li input[type="checkbox"] {
   width: 24px;
-  height: 24px; 
-  margin-right: 8px; 
-
+  height: 24px;
+  margin-right: var(--padding-small);
 }
 
+/* Scrollbar */
 .optionsContainer::-webkit-scrollbar {
   width: 8px;
 }
 
 .optionsContainer::-webkit-scrollbar-thumb {
-  background-color: rgba(133, 130, 130, 0.4);
+  background-color: var(--scrollbar-thumb-color);
   border-radius: 4px;
 }
 
 .optionsContainer::-webkit-scrollbar-track {
-  background-color: transparent;
+  background-color: var(--scrollbar-track-color);
 }
-
