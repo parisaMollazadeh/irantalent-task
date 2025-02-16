@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import SelectBoxOption from "./SelectBoxOption";
 import styles from './SelectBox.module.css';
 import SelectBoxSearch from "./SelectBoxSearch";
+import { filterArrayWithStringField, sortArrayBySelection } from "@/app/utils/array";
 
 interface SelectBoxProps {
   title: string;
@@ -19,21 +20,33 @@ const SelectBox: React.FC<SelectBoxProps> = ({title, options, onChange, multiSel
 
   const handleItemSelect = (option: SelectOption) => {
     if (multiSelect) {
-      const updatedSelectedItems = selectedItems.includes(option)
-        ? selectedItems.filter(sItem => sItem.id !== sItem.id)
+      const isAlreadySelected = selectedItems.some((sItem) => sItem.id === option.id);
+      const updatedSelectedItems = isAlreadySelected
+        ? selectedItems.filter((sItem) => sItem.id !== option.id)
         : [...selectedItems, option];
+  
       setSelectedItems(updatedSelectedItems);
-      onChange(updatedSelectedItems);
-    } else {
-      setSelectedItems([option]);
-      onChange([option]);
+  
+      // Move selected items to the top of array
+      const reorderedOptions = [
+        ...updatedSelectedItems,
+        ...options.filter((opt) => !updatedSelectedItems.some((sel) => sel.id === opt.id)),
+      ];
+      onChange(reorderedOptions); 
+      return
+    }  
+    
+     setSelectedItems([option]);
+      // Move the selected item to the top
+      const reorderedOptions = [option, ...options.filter((opt) => opt.id !== option.id)];
+      onChange(reorderedOptions); 
       setIsOpen(false);
-    }
+    
   };
+  
+  // first sort selected Data and filter sorted list with search key
+  const filteredOptions = sortArrayBySelection (filterArrayWithStringField(options, searchQuery, 'name'), selectedItems, 'id')
 
-  const filteredOptions = options.filter(option =>
-    option.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
 
   // close options when user click any where of page
   useEffect(() => {
@@ -83,5 +96,4 @@ return (
   </div>
 )
 };
-
 export default SelectBox;
