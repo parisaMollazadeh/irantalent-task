@@ -1,10 +1,10 @@
-/* SelectBox.module.css */
 .selectBox {
   position: relative;
   font-family: Arial, sans-serif;
   width: 250px;
   display: inline-block;
 }
+
 .inputWrapper {
   display: flex;
   justify-content: space-between;
@@ -37,7 +37,6 @@
 .arrow {
   font-size: 18px;
   color: inherit;
-  transition: transform 0.3s ease;
 }
 
 .open .arrow {

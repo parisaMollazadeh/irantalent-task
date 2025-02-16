@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        {options && <>
+        {options &&
           <SelectBox
             title="Industry"
             options={options}
@@ -31,17 +31,8 @@ export default function Home() {
             multiSelect={true}
             showSearch={true}
           />
-
-        {/* single select option without search*/}
-          {/* <SelectBox
-            title="Industry"
-            options={options}
-            onChange={handleSelectionChange}
-            multiSelect={false}
-            showSearch={false}
-          /> */}
-        </>
         }
+        
       </main>
     </div>
   );

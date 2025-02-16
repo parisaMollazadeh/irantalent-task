@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import SelectBoxOption from "./SelectBoxOption";
 import styles from './SelectBox.module.css';
+import SelectBoxSearch from "./SelectBoxSearch";
 
 interface SelectBoxProps {
-title: string;
+  title: string;
   options: SelectOption[];
   onChange: (selectedItems: SelectOption[]) => void;
   multiSelect: boolean;
@@ -16,16 +17,16 @@ const SelectBox: React.FC<SelectBoxProps> = ({title, options, onChange, multiSel
   const [searchQuery, setSearchQuery] = useState("");
   const selectRef = useRef<HTMLDivElement | null>(null);
 
-  const handleItemSelect = (item: SelectOption) => {
+  const handleItemSelect = (option: SelectOption) => {
     if (multiSelect) {
-      const updatedSelectedItems = selectedItems.includes(item)
-        ? selectedItems.filter(i => i.id !== item.id)
-        : [...selectedItems, item];
+      const updatedSelectedItems = selectedItems.includes(option)
+        ? selectedItems.filter(sItem => sItem.id !== sItem.id)
+        : [...selectedItems, option];
       setSelectedItems(updatedSelectedItems);
       onChange(updatedSelectedItems);
     } else {
-      setSelectedItems([item]);
-      onChange([item]);
+      setSelectedItems([option]);
+      onChange([option]);
       setIsOpen(false);
     }
   };
@@ -65,11 +66,13 @@ return (
         }
         readOnly
       />
-      <span className={styles.arrow}>{isOpen ? "˄" : "˅"}</span>
+      <span className={styles.arrow}>˅</span>
     </div>
 
     {isOpen && (
       <div className={styles.dropdown}>
+        {showSearch && <SelectBoxSearch searchQuery={searchQuery} setSearchQuery={setSearchQuery} placeHolder={`Search ${title}`}/>}
+
         <SelectBoxOption
           options={filteredOptions}
           selectedItems={selectedItems}
