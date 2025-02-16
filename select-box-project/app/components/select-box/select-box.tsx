@@ -61,39 +61,51 @@ const SelectBox: React.FC<SelectBoxProps> = ({title, options, onChange, multiSel
   }, []);
 
 return (
-  <div ref={selectRef} className={`${styles.selectBox} ${isOpen ? styles.open : ""}`}>
-    <div
-      className={`${styles.inputWrapper} ${
-        selectedItems.length > 0 ? styles.selected : ""
-      }`}
-      onClick={() => setIsOpen(!isOpen)}
-    >
-      <input
-        type="text"
-        value={
-          selectedItems.length === 0
-            ? title
-            : selectedItems.length === 1
-            ? selectedItems[0].name
-            : `${title} ${selectedItems.length}`
-        }
-        readOnly
-      />
-      <span className={styles.arrow}>˅</span>
-    </div>
+ <div ref={selectRef} className={`${styles.selectBox} ${isOpen ? styles.open : ""}`}>
+<div
+  className={`${styles.inputWrapper} ${
+    selectedItems.length === 0 ? styles.noSelection : ""
+  }`}
+  onClick={() => setIsOpen(!isOpen)}
+>
+  <input
+    type="text"
+    value={
+      selectedItems.length === 0 || selectedItems.length > 1
+        ? title
+        : selectedItems[0].name
+    }
+    readOnly
+  />
+  <span
+    className={`${styles.countBadge} ${
+      selectedItems.length > 1 ? styles.visible : ""
+    }`}
+  >
+    {selectedItems.length > 1 ? selectedItems.length : ""}
+  </span>
+  <span className={styles.arrow}>˅</span>
+</div>
 
-    {isOpen && (
-      <div className={styles.dropdown}>
-        {showSearch && <SelectBoxSearch searchQuery={searchQuery} setSearchQuery={setSearchQuery} placeHolder={`Search ${title}`}/>}
 
-        <SelectBoxOption
-          options={filteredOptions}
-          selectedItems={selectedItems}
-          onItemSelect={handleItemSelect}
+  {isOpen && (
+    <div className={styles.dropdown}>
+      {showSearch && (
+        <SelectBoxSearch
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          placeHolder={`Search ${title}`}
         />
-      </div>
-    )}
-  </div>
+      )}
+      <SelectBoxOption
+        options={filteredOptions}
+        selectedItems={selectedItems}
+        onItemSelect={handleItemSelect}
+      />
+    </div>
+  )}
+</div>
+
 )
 };
 export default SelectBox;

@@ -17,7 +17,7 @@ const SelectBoxOption: React.FC<SelectBoxOptionProps> = ({
         <li key={option.id} onClick={() => onItemSelect(option)}>
           <input
             type="checkbox"
-            checked={selectedItems.includes(option)}
+            checked={selectedItems.some((item) => item.id === option.id)}
             readOnly
           />
           {option.name}
