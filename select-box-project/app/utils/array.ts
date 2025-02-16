@@ -1,5 +1,11 @@
-export const flattenAndPick = <T>(nestedArray: T[][], limit: number = 200): T[] => {
-    return (nestedArray.flat(2) as T[]).slice(0, limit);
+export const flattenAndPick = <T>(nestedArray: T[][], joinLevel:number ,limit: number = 200 ): T[] => {
+      
+      try{
+        return (nestedArray.flat(joinLevel) as T[]).slice(0, limit);
+      }catch{
+        throw('Failed to flaat or pick ');
+      }
+      
   };
   
 
