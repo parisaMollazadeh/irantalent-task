@@ -29,6 +29,8 @@ export default function Home() {
             onChange={handleSelectionChange}
             multiSelect={true}
             showSearch={true}
+            allOption={true}
+          
           />
         }
         

@@ -8,17 +8,28 @@ interface SelectBoxProps {
   title: string;
   options: SelectOption[];
   onChange: (selectedItems: SelectOption[]) => void;
-  multiSelect: boolean;
-  showSearch: boolean;
+  multiSelect?: boolean;
+  showSearch?: boolean;
+  allOption?: boolean;
 }
 
-const SelectBox: React.FC<SelectBoxProps> = ({title, options, onChange, multiSelect , showSearch}) => {
+const SelectBox: React.FC<SelectBoxProps> = ({title, options, onChange, multiSelect , showSearch, allOption}) => {
   const [selectedItems, setSelectedItems] = useState<SelectOption[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const selectRef = useRef<HTMLDivElement | null>(null);
-
   const handleItemSelect = (option: SelectOption) => {
+    if (option.id === "all") { 
+      if (selectedItems.length === options.length) {
+        setSelectedItems([]); 
+        onChange([]); 
+      } else {
+        setSelectedItems(options); 
+        onChange(options); 
+      }
+      return;
+    }
+  
     if (multiSelect) {
       const isAlreadySelected = selectedItems.some((sItem) => sItem.id === option.id);
       const updatedSelectedItems = isAlreadySelected
@@ -27,26 +38,29 @@ const SelectBox: React.FC<SelectBoxProps> = ({title, options, onChange, multiSel
   
       setSelectedItems(updatedSelectedItems);
   
-      // Move selected items to the top of array
       const reorderedOptions = [
         ...updatedSelectedItems,
         ...options.filter((opt) => !updatedSelectedItems.some((sel) => sel.id === opt.id)),
       ];
-      onChange(reorderedOptions); 
-      return
-    }  
-    
-     setSelectedItems([option]);
-      // Move the selected item to the top
-      const reorderedOptions = [option, ...options.filter((opt) => opt.id !== option.id)];
-      onChange(reorderedOptions); 
-      setIsOpen(false);
-    
+      onChange(reorderedOptions);
+      return;
+    }
+  
+    setSelectedItems([option]);
+    const reorderedOptions = [option, ...options.filter((opt) => opt.id !== option.id)];
+    onChange(reorderedOptions);
+    setIsOpen(false);
   };
   
+  const displayedOptions = allOption ? [{ id: "all", name: "All" }, ...options] : options;
+  
   // first sort selected Data and filter sorted list with search key
-  const filteredOptions = sortArrayBySelection (filterArrayWithStringField(options, searchQuery, 'name'), selectedItems, 'id')
-
+  const filteredOptions = sortArrayBySelection(
+    filterArrayWithStringField(displayedOptions, searchQuery, 'name'),
+    selectedItems,
+    'id'
+  );
+  
 
   // close options when user click any where of page
   useEffect(() => {
