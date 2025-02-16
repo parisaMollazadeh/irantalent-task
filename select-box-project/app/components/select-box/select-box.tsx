@@ -88,22 +88,27 @@ return (
 </div>
 
 
-  {isOpen && (
-    <div className={styles.dropdown}>
-      {showSearch && (
+{isOpen && (
+  <div className={styles.dropdown}>
+    {showSearch && (
+      <div className={styles.searchBoxContainer}>
         <SelectBoxSearch
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
           placeHolder={`Search ${title}`}
         />
-      )}
+      </div>
+    )}
+    <div className={styles.optionsContainer}>
       <SelectBoxOption
         options={filteredOptions}
         selectedItems={selectedItems}
         onItemSelect={handleItemSelect}
       />
     </div>
-  )}
+  </div>
+)}
+
 </div>
 
 )
