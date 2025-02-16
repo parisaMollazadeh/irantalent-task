@@ -65,3 +65,22 @@ Ensure you have the following installed on your system:
    ```
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser to view the app.
+
+## **GitFlow Guide for Component Development**
+
+This project follows a structured GitFlow workflow for feature, component, and hotfix management. Below is a guide on how to handle component branches in this workflow to ensure smooth collaboration and maintainability.
+
+---
+
+### **Component Branches Workflow**
+
+#### **1. Branch Naming Convention**
+
+When working on individual components, the branch name should follow this structure:
+
+```
+component/<component-name>
+```
+
+- **Example**: `component/select-box`
+  
