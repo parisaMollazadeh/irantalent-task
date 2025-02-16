@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import SelectBoxOption from "./selectBoxOption";
 import SelectBoxSearch from "./selectBoxSearch";
 import { filterArrayWithStringField, sortArrayBySelection } from "@/app/utils/array";
-import styles from './SelectBox.module.css';
+import styles from './selectBox.module.css';
+import SelectBoxInput from "./select-box-input/selectBoxInput";
 
 
 interface SelectBoxProps {
@@ -77,31 +78,12 @@ const SelectBox: React.FC<SelectBoxProps> = ({title, options, onChange, multiSel
 
 return (
  <div ref={selectRef} className={`${styles.selectBox} ${isOpen ? styles.open : ""}`}>
-<div
-  className={`${styles.inputWrapper} ${
-    selectedItems.length === 0 ? styles.noSelection : ""
-  }`}
-  onClick={() => setIsOpen(!isOpen)}
->
-  <input
-    type="text"
-    value={
-      selectedItems.length === 0 || selectedItems.length > 1
-        ? title
-        : selectedItems[0].name
-    }
-    readOnly
-  />
-  <span
-    className={`${styles.countBadge} ${
-      selectedItems.length > 1 ? styles.visible : ""
-    }`}
-  >
-    {selectedItems.length > 1 ? selectedItems.length : ""}
-  </span>
-  <span className={styles.arrow}>˅</span>
-</div>
-
+  <SelectBoxInput
+        title={title}
+        selectedItems={selectedItems}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
 
 {isOpen && (
   <div className={styles.dropdown}>

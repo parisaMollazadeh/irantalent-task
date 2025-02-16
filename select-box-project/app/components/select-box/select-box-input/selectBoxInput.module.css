@@ -1,0 +1,65 @@
+
+.inputWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--padding-medium);
+  border-radius: 25px;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  cursor: pointer;
+  transition: background-color var(--transition-duration), box-shadow var(--transition-duration);
+  white-space: nowrap;
+  border: 2px solid transparent;
+}
+
+.inputWrapper.noSelection {
+  background-color: var(--secondary-color); /* White */
+  color: var(--text-color); /* Black */
+  border: 2px solid var(--text-color); /* Black */
+}
+
+.inputWrapper input {
+  border: none;
+  background-color: transparent;
+  font-size: var(--font-size-large);
+  color: inherit;
+  outline: none;
+  cursor: pointer;
+  flex-grow: 1;
+  min-width: 50px;
+  max-width: 100%;
+}
+
+/* Arrow */
+.arrow {
+  font-size: var(--font-size-base);
+  font-weight: bold;
+  color: inherit;
+  margin-left: var(--padding-small);
+  transition: transform var(--transition-duration);
+}
+
+.open .arrow {
+  transform: rotate(180deg);
+}
+
+/* Badge */
+.countBadge {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--badge-size);
+  height: var(--badge-size);
+  background-color: var(--secondary-color); /* White */
+  color: var(--primary-color); /* Blue */
+  font-size: 0.9rem;
+  font-weight: bold;
+  border-radius: 50%;
+  margin-right: var(--padding-small);
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+}
