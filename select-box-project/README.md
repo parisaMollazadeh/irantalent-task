@@ -80,7 +80,13 @@ When working on individual components, the branch name should follow this struct
 
 ```
 component/<component-name>
+feature/<feature-name>
 ```
 
 - **Example**: `component/select-box`
   
+
+#### hooks
+
+The `hooks` directory contains global and shared hooks utilized across the
+application.
