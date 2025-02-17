@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface SelectBoxSearchProps {
   searchQuery: string;
@@ -9,12 +9,12 @@ interface SelectBoxSearchProps {
 const SelectBoxSearch: React.FC<SelectBoxSearchProps> = ({
   searchQuery,
   setSearchQuery,
-  placeHolder
+  placeHolder,
 }) => {
   return (
     <input
       type="text"
-      placeholder={placeHolder || "Search"}
+      placeholder={placeHolder || 'Search'}
       value={searchQuery}
       onChange={(e) => setSearchQuery(e.target.value)}
     />
