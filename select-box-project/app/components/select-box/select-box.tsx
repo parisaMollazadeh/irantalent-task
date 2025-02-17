@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import SelectBoxOption from "./selectBoxOption";
-import SelectBoxSearch from "./selectBoxSearch";
 import { filterArrayWithStringField, sortArrayBySelection } from "@/app/utils/array";
 import styles from './selectBox.module.css';
 import SelectBoxInput from "./select-box-input/selectBoxInput";
+import SelectBoxOption from "./selectBoxOption";
+import SelectBoxSearch from "./selectBoxSearch";
 
 
 interface SelectBoxProps {
@@ -20,15 +20,24 @@ const SelectBox: React.FC<SelectBoxProps> = ({title, options, onChange, multiSel
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const selectRef = useRef<HTMLDivElement | null>(null);
+ 
+    // close options when user click any where of page
+    useEffect(() => {
+      const handleClickOutside = (e: MouseEvent) => {
+        if (selectRef.current && !selectRef.current.contains(e.target as Node)) {
+          setIsOpen(false);
+        }
+      };
+      document.addEventListener("click", handleClickOutside);
+      //remove side effects
+      return () => document.removeEventListener("click", handleClickOutside);
+    }, []);
+    
   const handleItemSelect = (option: SelectOption) => {
-    if (option.id === "all") { 
-      if (selectedItems.length === options.length) {
-        setSelectedItems([]); 
-        onChange([]); 
-      } else {
-        setSelectedItems(options); 
-        onChange(options); 
-      }
+    if (option.id === "all") {
+      const newSelection = selectedItems.length === options.length ? [] : options;
+      setSelectedItems(newSelection);
+      onChange(newSelection); // Pass only selected items
       return;
     }
   
@@ -39,21 +48,15 @@ const SelectBox: React.FC<SelectBoxProps> = ({title, options, onChange, multiSel
         : [...selectedItems, option];
   
       setSelectedItems(updatedSelectedItems);
-  
-      const reorderedOptions = [
-        ...updatedSelectedItems,
-        ...options.filter((opt) => !updatedSelectedItems.some((sel) => sel.id === opt.id)),
-      ];
-      onChange(reorderedOptions);
+      onChange(updatedSelectedItems); // Pass only selected items
       return;
     }
   
     setSelectedItems([option]);
-    const reorderedOptions = [option, ...options.filter((opt) => opt.id !== option.id)];
-    onChange(reorderedOptions);
+    onChange([option]); // Pass only selected item
     setIsOpen(false);
   };
-  
+
   const displayedOptions = allOption ? [{ id: "all", name: "All" }, ...options] : options;
   
   // first sort selected Data and filter sorted list with search key
@@ -62,19 +65,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({title, options, onChange, multiSel
     selectedItems,
     'id'
   );
-  
 
-  // close options when user click any where of page
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (selectRef.current && !selectRef.current.contains(e.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("click", handleClickOutside);
-    //remove side effects
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, []);
 
 return (
  <div ref={selectRef} className={`${styles.selectBox} ${isOpen ? styles.open : ""}`}>
@@ -101,6 +92,7 @@ return (
         options={filteredOptions}
         selectedItems={selectedItems}
         onItemSelect={handleItemSelect}
+        multiSelect={multiSelect}
       />
     </div>
   </div>

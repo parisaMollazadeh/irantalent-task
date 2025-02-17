@@ -33,15 +33,10 @@
 
 /* Arrow */
 .arrow {
-  font-size: var(--font-size-base);
-  font-weight: bold;
-  color: inherit;
-  margin-left: var(--padding-small);
-  transition: transform var(--transition-duration);
-}
-
-.open .arrow {
+  width: 24px;
+  height: 16px;
   transform: rotate(180deg);
+  transition: transform 0.3s ease;
 }
 
 /* Badge */

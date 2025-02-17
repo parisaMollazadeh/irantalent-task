@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./selectBoxInput.module.css";
+import Image from "next/image";
 
 interface SelectBoxInputProps {
   title: string;
@@ -36,7 +37,15 @@ const SelectBoxInput: React.FC<SelectBoxInputProps> = ({
           {selectedItems.length}
         </span>
       )}
-      <span className={styles.arrow}>˅</span>
+
+      <Image 
+        src={`svg/ic-arrow${hasNoSelection ?'': '-white'}.svg`}
+        width={24} 
+        height={16} 
+        alt="dropdown" 
+        className={isOpen ? styles.arrow : ""}
+      />  
+
     </div>
   );
 };

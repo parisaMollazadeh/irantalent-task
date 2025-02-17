@@ -11,6 +11,9 @@ export default function Home() {
   const handleSelectionChange = (selectedItems: { id: string; name: string }[]) => {
     console.log("Selected items:", selectedItems);
   };
+  const handleSingleSelectionChange = (selectedItems: { id: string; name: string }[]) => {
+    console.log("Selected single item:", selectedItems);
+  };
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error loading data.</div>;
@@ -23,7 +26,8 @@ export default function Home() {
     <div className={styles.page}>
       <main className={styles.main}>
         {options &&
-          <SelectBox
+        <>         
+         <SelectBox
             title="Industry"
             options={options}
             onChange={handleSelectionChange}
@@ -32,6 +36,16 @@ export default function Home() {
             allOption={true}
           
           />
+
+          <SelectBox
+            title="Industry single"
+            options={options}
+            onChange={handleSingleSelectionChange}
+            multiSelect={false}
+            showSearch={true}
+        />
+        </>
+
         }
         
       </main>
