@@ -14,7 +14,7 @@ const useFetch = <T>(endpoint: string) => {
         const result: T = await res.json(); // Type the result to T
         setData(result);
       } catch (err) {
-        setError('Failed to fetch data');
+        setError(`Failed to fetch data ${err}`);
       } finally {
         setLoading(false);
       }
