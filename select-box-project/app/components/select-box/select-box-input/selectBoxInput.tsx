@@ -1,6 +1,6 @@
-import React from "react";
-import styles from "./selectBoxInput.module.css";
-import Image from "next/image";
+import React from 'react';
+import styles from './selectBoxInput.module.css';
+import Image from 'next/image';
 
 interface SelectBoxInputProps {
   title: string;
@@ -21,14 +21,16 @@ const SelectBoxInput: React.FC<SelectBoxInputProps> = ({
   return (
     <div
       className={`${styles.inputWrapper} ${
-        hasNoSelection ? styles.noSelection : ""
+        hasNoSelection ? styles.noSelection : ''
       }`}
       onClick={() => setIsOpen(!isOpen)}
     >
       <input
         type="text"
         value={
-          hasNoSelection || hasMultipleSelections ? title : selectedItems[0]?.name
+          hasNoSelection || hasMultipleSelections
+            ? title
+            : selectedItems[0]?.name
         }
         readOnly
       />
@@ -38,14 +40,13 @@ const SelectBoxInput: React.FC<SelectBoxInputProps> = ({
         </span>
       )}
 
-      <Image 
-        src={`svg/ic-arrow${hasNoSelection ?'': '-white'}.svg`}
-        width={24} 
-        height={16} 
-        alt="dropdown" 
-        className={isOpen ? styles.arrow : ""}
-      />  
-
+      <Image
+        src={`svg/ic-arrow${hasNoSelection ? '' : '-white'}.svg`}
+        width={24}
+        height={16}
+        alt="dropdown"
+        className={isOpen ? styles.arrow : ''}
+      />
     </div>
   );
 };

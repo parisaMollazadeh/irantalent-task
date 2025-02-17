@@ -3,7 +3,7 @@ import { API_BASE_URL } from '../utils/api';
 
 // Define a generic type
 const useFetch = <T>(endpoint: string) => {
-  const [data, setData] = useState<T | null>(null);  
+  const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 

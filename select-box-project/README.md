@@ -1,11 +1,10 @@
 # irantalent-task
-irantalent  recruitment task
 
+irantalent recruitment task
 
 # **Custom Select Box Component**
 
 A reusable and customizable `SelectBox` component built with Next.js, React and TypeScript. The component supports single and multi-selection, search functionality, and dynamic data input.
-
 
 ---
 
@@ -45,12 +44,14 @@ Ensure you have the following installed on your system:
 ### **Installation**
 
 1. **Clone the repository**:
+
    ```bash
    git clone https://github.com/parisaMollazadeh/irantalent-task.git
    cd select-box-project
    ```
 
 2. **Install dependencies**:
+
    ```bash
    npm install
    # or
@@ -58,6 +59,7 @@ Ensure you have the following installed on your system:
    ```
 
 3. **Run the development server**:
+
    ```bash
    npm run dev
    # or
@@ -84,7 +86,6 @@ feature/<feature-name>
 ```
 
 - **Example**: `component/select-box`
-  
 
 #### hooks
 
